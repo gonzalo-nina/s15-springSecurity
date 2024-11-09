@@ -30,5 +30,28 @@ public class EstudianteController {
         }
         return ResponseEntity.notFound().build();
     }
+    //PostMapping
+    @PostMapping
+    public Estudiante createEstudiante(@RequestBody Estudiante estudiante){
+        return estudianteService.createEstudiante(estudiante);
+    }
+    //PutMapping (Actualiza)
+    @PutMapping("/{id}")
+    public ResponseEntity<Estudiante> updateEstudiante(@PathVariable Long id, @RequestBody Estudiante estudiante){
+        Estudiante estudiante1 = estudianteService.actualizarEstudiante(id, estudiante);
+        if (estudiante1 != null) {
+            return ResponseEntity.ok(estudiante1);
+        }
+        return ResponseEntity.notFound().build();
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Estudiante> deleteEstudiante(@PathVariable Long id){
+        estudianteService.eliminarEstudiante(id.longValue());
+        return ResponseEntity.noContent().build();
+    }
+
+
+    //DeleteMapping
+
 
 }
